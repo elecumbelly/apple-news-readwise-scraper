@@ -1,0 +1,18 @@
+[project]
+name = "apple-news-readwise-scraper"
+version = "0.1.0"
+description = "Send saved Apple News articles to Readwise Reader on macOS."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "beautifulsoup4",
+    "lxml",
+    "pillow",
+    "pyobjc-framework-Cocoa",
+    "readability-lxml",
+    "requests",
+]
+
+[tool.uv]
+package = false

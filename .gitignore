@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+debug.log
+logs/
+
+# State files
+.seen_articles.json
+
+# Claude
+.claude/
+
+# Secrets
+.env
+
+# Local, user-specific legacy LaunchAgent configuration
+com.sspence.applenews-readwise.plist

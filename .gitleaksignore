@@ -1,0 +1,5 @@
+# Local .env holds this machine's real API keys; it is gitignored and never
+# committed. Suppress the filesystem-scan findings by fingerprint (file:rule:line)
+# — never put raw secret values in this file.
+.env:generic-api-key:1
+.env:generic-api-key:2
