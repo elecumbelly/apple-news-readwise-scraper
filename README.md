@@ -23,7 +23,7 @@ Automatically sends saved Apple News articles to Readwise Reader.
 ### Beginner quick start
 
 This project works only on a Mac with Apple News. You will also need a Readwise
-Reader account. An adult may need to help with the macOS permission screens.
+Reader account.
 
 1. Download the project: on GitHub, click **Code** → **Download ZIP**. Double
    click the downloaded ZIP file to unpack it.
