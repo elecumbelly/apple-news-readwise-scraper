@@ -20,44 +20,51 @@ Automatically sends saved Apple News articles to Readwise Reader.
 
 ## Setup
 
-### Prerequisites
-- macOS with Apple News
-- [uv](https://github.com/astral-sh/uv) for Python dependency management
-- Readwise Reader account
+### Beginner quick start
 
-### Installation
+This project works only on a Mac with Apple News. You will also need a Readwise
+Reader account. An adult may need to help with the macOS permission screens.
 
-1. Store your API keys in the macOS Keychain (preferred):
+1. Download the project: on GitHub, click **Code** → **Download ZIP**. Double
+   click the downloaded ZIP file to unpack it.
+2. Install [uv](https://docs.astral.sh/uv/getting-started/installation/), the
+   tool that installs this project's Python requirements.
+3. Open **Terminal** (press Command-Space, type `Terminal`, then press Return).
+   Type `cd ` (including the space), drag the unpacked project folder onto the
+   Terminal window, and press Return.
+4. Get your Readwise access token from
+   [Readwise](https://readwise.io/access_token). **Do not share this token or
+   put it in a screenshot.** Paste these three lines into Terminal, pressing
+   Return after each one:
    ```bash
-   # READWISE_TOKEN - get from https://readwise.io/access_token
-   security add-generic-password -s readwise-token -a "$USER" -w "YOUR_READWISE_TOKEN"
-   # IMGBB_API_KEY (optional; only used by the dormant screenshot-upload code,
-   # which no live path calls today) - get from https://api.imgbb.com/
-   security add-generic-password -s imgbb-api-key -a "$USER" -w "YOUR_IMGBB_KEY"
+   read -s "READWISE_TOKEN?Paste your Readwise token, then press Return: "
+   security add-generic-password -U -s readwise-token -a "$USER" -w "$READWISE_TOKEN"
+   unset READWISE_TOKEN
    ```
-
-   Secrets resolve lazily through a fallback chain: Keychain →
-   `READWISE_TOKEN`/`IMGBB_API_KEY` environment variables → a `.env` file next
-   to the scripts. If no Readwise token is found anywhere, the watcher logs the
-   problem and shows a macOS notification at startup instead of failing
-   silently on every save.
-
-2. Install the project dependencies (the daemon and watcher run from this
-   virtualenv):
+   Nothing appears while you paste the token—that is normal. This stores it in
+   your Mac's Keychain, which is the recommended and safest option.
+5. Paste these commands into Terminal:
    ```bash
    uv sync
-   ```
-
-3. Install the LaunchAgent (this generates a machine-specific plist from the
-   portable template):
-   ```bash
    ./install.sh
    ```
+6. Open **System Settings** → **Privacy & Security** → **Full Disk Access** and
+   turn on access for **Terminal**. Also allow Accessibility access if macOS
+   asks. These permissions let the app read Apple News and use the copy
+   fallback when needed.
 
-4. Grant **Full Disk Access** to Terminal (System Settings → Privacy & Security →
-   Full Disk Access). The watcher is launched via a hidden Terminal window so it
-   inherits Terminal's Full Disk Access — required to read the Apple News data.
-   Also grant Accessibility permissions when prompted (for the copy fallback).
+### Test it
+
+1. Open Apple News.
+2. Open an article, then click its bookmark button to save it.
+3. Open Readwise Reader: the article should appear there shortly.
+
+### For developers
+
+The Keychain method above is recommended. The watcher can also read
+`READWISE_TOKEN` from an environment variable or a local, gitignored `.env`
+file. If no token is configured, it shows a macOS notification instead of
+silently failing.
 
 ### Usage
 

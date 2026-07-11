@@ -6,9 +6,12 @@ This project keeps **no API keys or tokens in the repository**. Secrets are
 read at runtime from the macOS Keychain, environment variables, or a local
 gitignored `.env` file.
 
+In Terminal, enter the token without writing it into your shell history:
+
 ```bash
-security add-generic-password -s readwise-token -a "$USER" -w YOUR_TOKEN
-security add-generic-password -s imgbb-api-key -a "$USER" -w YOUR_KEY  # optional
+read -s "READWISE_TOKEN?Paste your Readwise token, then press Return: "
+security add-generic-password -U -s readwise-token -a "$USER" -w "$READWISE_TOKEN"
+unset READWISE_TOKEN
 ```
 
 ## Permissions
