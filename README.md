@@ -28,16 +28,23 @@ Reader account.
 1. Download the project: on GitHub, click **Code** → **Download ZIP**. Double
    click the downloaded ZIP file to unpack it.
 2. Install [uv](https://docs.astral.sh/uv/getting-started/installation/), the
-   tool that installs this project's Python requirements.
-3. Open **Terminal** (press Command-Space, type `Terminal`, then press Return).
-   Type `cd ` (including the space), drag the unpacked project folder onto the
-   Terminal window, and press Return.
+   tool that installs this project's Python requirements. Open **Terminal**
+   (press Command-Space, type `Terminal`, then press Return) and paste:
+   ```bash
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
+   Wait for it to finish, then close Terminal and open it again.
+3. In the new Terminal window, type `uv --version` and press Return. Seeing a
+   version number means it worked. Then type `cd ` (including the space), drag
+   the unpacked project folder onto the Terminal window, and press Return.
 4. Get your Readwise access token from
    [Readwise](https://readwise.io/access_token). **Do not share this token or
-   put it in a screenshot.** Paste these three lines into Terminal, pressing
+   put it in a screenshot.** Paste these five lines into Terminal, pressing
    Return after each one:
    ```bash
-   read -s "READWISE_TOKEN?Paste your Readwise token, then press Return: "
+   echo "Paste your Readwise token, then press Return (nothing will appear):"
+   read -r -s READWISE_TOKEN
+   echo
    security add-generic-password -U -s readwise-token -a "$USER" -w "$READWISE_TOKEN"
    unset READWISE_TOKEN
    ```
@@ -46,8 +53,10 @@ Reader account.
 5. Paste these commands into Terminal:
    ```bash
    uv sync
+   chmod +x install.sh
    ./install.sh
    ```
+   You should see `Installed and loaded: com.applenews-readwise.watcher`.
 6. Open **System Settings** → **Privacy & Security** → **Full Disk Access** and
    turn on access for **Terminal**. Also allow Accessibility access if macOS
    asks. These permissions let the app read Apple News and use the copy

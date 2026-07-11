@@ -9,7 +9,9 @@ gitignored `.env` file.
 In Terminal, enter the token without writing it into your shell history:
 
 ```bash
-read -s "READWISE_TOKEN?Paste your Readwise token, then press Return: "
+echo "Paste your Readwise token, then press Return (nothing will appear):"
+read -r -s READWISE_TOKEN
+echo
 security add-generic-password -U -s readwise-token -a "$USER" -w "$READWISE_TOKEN"
 unset READWISE_TOKEN
 ```

@@ -340,8 +340,8 @@ def send_to_readwise_reader(article: dict) -> bool:
     if not token:
         watcher_log(
             "   ❌ No Readwise token found (checked Keychain 'readwise-token', "
-            "$READWISE_TOKEN, and .env) — cannot save. Fix: "
-            'security add-generic-password -s readwise-token -a "$USER" -w YOUR_TOKEN'
+            "$READWISE_TOKEN, and .env) — cannot save. Add the token to "
+            "Keychain using the README instructions."
         )
         return False
 
@@ -371,8 +371,8 @@ def send_to_readwise_reader(article: dict) -> bool:
             # up a corrected Keychain entry / .env without a watcher restart.
             _SECRET_CACHE.pop("readwise-token", None)
             watcher_log(
-                "   ❌ Readwise rejected the token (401). Update it, e.g.: "
-                'security add-generic-password -U -s readwise-token -a "$USER" -w NEW_TOKEN'
+                "   ❌ Readwise rejected the token (401). Update the Keychain "
+                "item using the README instructions."
             )
             return False
         watcher_log(f"Readwise API error: {response.status_code} {response.text[:300]}")
